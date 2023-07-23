@@ -36,28 +36,41 @@ Engine::Engine()
 		// Time to get a new PC
 		m_Window.close();
 	}
+	else
+	{
+		// Load two shaders (1 vertex, 1 fragment)
+		m_RippleShader.loadFromFile("../shaders/vertShader.vert",
+			"../shaders/rippleShader.frag");
+	}
 
 	m_BackgroundTexture = TextureHolder::GetTexture(
-		"graphics/background.png");
+		"../graphics/background.png");
 
 	// Associate the sprite with the texture
 	m_BackgroundSprite.setTexture(m_BackgroundTexture);
 
-}
+
+	// Load the texture for the background vertex array
+	m_TextureTiles = TextureHolder::GetTexture(
+		"../graphics/tiles_sheet.png");
+
+	// Initialize the particle system
+	m_PS.init(1000);
+
+}// End Engine constructor
 
 void Engine::run()
 {
 	// Timing 	
 	Clock clock;
-	Time dt;
-	float dtAsSeconds;
+
 	while (m_Window.isOpen())
-	{	
-		dt = clock.restart();
+	{
+		Time dt = clock.restart();
 		// Update the total game time
 		m_GameTimeTotal += dt;
 		// Make a decimal fraction from the delta time
-		dtAsSeconds = dt.asSeconds();
+		float dtAsSeconds = dt.asSeconds();
 
 		input();
 		update(dtAsSeconds);

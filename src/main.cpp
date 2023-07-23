@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include "iostream"
 
 int main()
 {
@@ -8,8 +7,6 @@ int main()
 
 	// Start the engine
 	engine.run();
-	std::cout << "Hi engine" << std::endl;
-
 
 	// Quit in the usual way when the engine is stopped
 	return 0;
